@@ -1,23 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react'
 
-function App() {
+const App= props => {
+  const [like, setLike] = useState(100);
+  const [dislike, setDislike] = useState(25);
+  let likeClasses = ["like-button"]
+  let dislikeClasses = ["dislike-button"]
+
+  const likeHandler = () => {
+    likeClasses.push("liked")
+    console.log(likeClasses)
+    setLike(prev => prev + 1)
+  }
+  
+  const dislikeHandler = () => {
+    dislikeClasses.push("disliked")
+    setDislike(prev => prev + 1)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button className={likeClasses.join(' ')} onClick={() => likeHandler()}>Like &nbsp; | <span>{like}</span> </button> 
+      <button className={dislikeClasses.join(' ')} onClick={() => dislikeHandler()}>Dislike &nbsp; | <span>{dislike}</span></button>
     </div>
   );
 }
